@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_timer/ticker.dart';
 
 part 'timer_event.dart';
@@ -61,5 +62,29 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     emit(event.duration > 0
         ? TimerRunInProgress(event.duration)
         : const TimerRunComplete());
+  }
+
+  // @override
+  // void onEvent(TimerEvent event) {
+  //   super.onEvent(event);
+  //   if (kDebugMode) {
+  //     print(event);
+  //   }
+  // }
+
+  // @override
+  // void onChange(Change<TimerState> change) {
+  //   super.onChange(change);
+  //   if (kDebugMode) {
+  //     print(change);
+  //   }
+  // }
+
+  @override
+  void onTransition(Transition<TimerEvent, TimerState> transition) {
+    super.onTransition(transition);
+    if (kDebugMode) {
+      print(transition);
+    }
   }
 }

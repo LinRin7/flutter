@@ -10,5 +10,5 @@ import 'app.dart';
 // Learn to use StreamSubscription in a Bloc.
 // Prevent unnecessary rebuilds with buildWhen.
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
