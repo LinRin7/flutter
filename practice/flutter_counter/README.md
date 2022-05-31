@@ -1,4 +1,4 @@
-教學來源 : https://bloclibrary.dev/#/zh-cn/fluttertimertutorial?id=timerstate
+教學來源 : https://bloclibrary.dev/#/zh-cn/fluttercountertutorial
 
 # flutter_counter
 
