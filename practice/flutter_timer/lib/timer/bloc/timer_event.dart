@@ -32,6 +32,7 @@ class TimerReset extends TimerEvent {
   const TimerReset();
 }
 
+//通知bloc，(每)一秒經過的事件發生
 class TimerTicked extends TimerEvent {
   const TimerTicked({required this.duration});
   final int duration;

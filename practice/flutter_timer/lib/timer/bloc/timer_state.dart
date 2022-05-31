@@ -16,6 +16,8 @@ part of 'timer_bloc.dart';
 // if the state is TimerRunPause the user will be able to resume the timer and reset the timer.
 // if the state is TimerRunComplete the user will be able to reset the timer.
 abstract class TimerState extends Equatable {
+  //不管bloc在哪，都要知道剩餘的秒數。所以用一個int參數duration
+  //event發生後，傳遞新的state(秒數)到UI上
   final int duration;
 
   const TimerState(this.duration);

@@ -10,13 +10,16 @@ part 'timer_state.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final Ticker _ticker;
-  static const int _duration = 60;
+  static const int _duration = 70;
 
   StreamSubscription<int>? _tickerSubscription;
 
+  //定義TimerBloc的初始狀態(super)
+  //定義對Ticker的依賴關係
   TimerBloc({required Ticker ticker})
       : _ticker = ticker,
         super(const TimerInitial(_duration)) {
+    //實現事件處裡 <event> (處理method)
     on<TimerStarted>(_onStarted);
     on<TimerPaused>(_onPaused);
     on<TimerResumed>(_onResumed);
@@ -34,7 +37,9 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     emit(TimerRunInProgress(event.duration));
     _tickerSubscription?.cancel();
     _tickerSubscription =
+        //監聽 _ticker.tick 流
         _ticker.tick(ticks: event.duration).listen((duration) {
+      //在每個觸發時間，添加一個包含剩餘時間的TimerTicked事件
       add(TimerTicked(duration: duration));
     });
   }
@@ -58,9 +63,10 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     emit(const TimerInitial(_duration));
   }
 
+  //每次收到TimerTicked事件:
   void _onTicked(TimerTicked event, Emitter<TimerState> emit) {
     emit(event.duration > 0
-        ? TimerRunInProgress(event.duration)
+        ? TimerRunInProgress(event.duration) //發送一個帶有新的剩餘時間的狀態
         : const TimerRunComplete());
   }
 
